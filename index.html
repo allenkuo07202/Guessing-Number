@@ -39,12 +39,12 @@
 
   // Guess function
   var count = 0;
+  var lowerbound = 1;
+  var higherbound = 100;
   function checkGuess() {
     count++;
     const userGuess = parseInt(guessField.value);
     console.log("userGuess: " + userGuess);
-
-
 
     if (userGuess === targetNumber) {
       message.textContent = `恭喜你，你猜對了！你這次猜了` + count + `次哦～`;
@@ -53,17 +53,24 @@
     } else if (userGuess < targetNumber) {
       message.textContent = "太小了，再試一次。";
       message.style.color = "red";
-      question.textContent = userGuess + ` 到 100 之間的數字，你猜是多少？`;
+      lowerbound = userGuess;
+      question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
+      if (count == 5) {
+        message.textContent = `You Failed! 答案是 ${targetNumber}`;
+        guessSubmit.disabled = true;
+      }
     } else {
       message.textContent = "太大了，再試一次。";
       message.style.color = "red";
-      question.textContent = `1 到 ${userGuess} 之間的數字，你猜是多少？`;
+      higherbound = userGuess;
+      question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
+      if (count == 5) {
+        message.textContent = `You Failed! 答案是 ${targetNumber}`;
+        guessSubmit.disabled = true;
+      }
     }
 
-    if (count == 5) {
-      message.textContent = `You Failed! 答案是 ${targetNumber}`;
-      guessSubmit.disabled = true;
-    }
+
 
     guessField.value = "";
     guessField.focus();
