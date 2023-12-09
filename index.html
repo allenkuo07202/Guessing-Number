@@ -44,6 +44,8 @@
     const userGuess = parseInt(guessField.value);
     console.log("userGuess: " + userGuess);
 
+
+
     if (userGuess === targetNumber) {
       message.textContent = `恭喜你，你猜對了！你這次猜了` + count + `次哦～`;
       message.style.color = "green";
@@ -56,6 +58,11 @@
       message.textContent = "太大了，再試一次。";
       message.style.color = "red";
       question.textContent = `1 到 ${userGuess} 之間的數字，你猜是多少？`;
+    }
+
+    if (count == 5) {
+      message.textContent = `You Failed! 答案是 ${targetNumber}`;
+      guessSubmit.disabled = true;
     }
 
     guessField.value = "";
