@@ -40,27 +40,24 @@
 
   function answerRevealed() {
     answer.textContent = targetNumber;
+    answerSubmit.disabled = true;
   }
 
   function gameReset() {
-    var count = 0;
-    var lowerbound = 1;
-    var higherbound = 100;
+    count = 0;
+    lowerbound = 1;
+    higherbound = 100;
 
     targetNumber = Math.floor(Math.random() * 100) + 1;
     console.log("answer: " + targetNumber);
 
-
-    // const guessField = document.getElementById("guessField");
-    // const guessSubmit = document.getElementById("guessSubmit");
-    // const answerSubmit = document.getElementById("answerSubmit");
-    // const message = document.querySelector(".message");
-    // const answer = document.querySelector(".answer");
-    // const question = document.querySelector(".question");
-
     message.textContent = "";
+    answer.textContent = "";
     question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
     guessSubmit.disabled = false;
+    resetSubmit.disabled = true;
+    answerSubmit.disabled = false;
+
 
     guessSubmit.addEventListener("click", checkGuess);
     answerSubmit.addEventListener("click", answerRevealed);
@@ -81,10 +78,7 @@
       message.style.color = "green";
       guessSubmit.disabled = true;
       resetSubmit.disabled = false;
-      // setZero();
-      count = 0;
-      lowerbound = 1;
-      higherbound = 100;
+
     } else if (userGuess < targetNumber) {
       message.textContent = "太小了，再試一次。";
       message.style.color = "red";
@@ -94,10 +88,7 @@
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
         resetSubmit.disabled = false;
-        count = 0;
-        lowerbound = 1;
-        higherbound = 100;
-        // setZero();
+
       }
     } else {
       message.textContent = "太大了，再試一次。";
@@ -108,19 +99,9 @@
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
         resetSubmit.disabled = false;
-        count = 0;
-        lowerbound = 1;
-        higherbound = 100;
-        // setZero();
+
       }
     }
-
-    function setZero() {
-      var count = 0;
-      var lowerbound = 1;
-      var higherbound = 100;
-    }
-
 
     guessField.value = "";
     guessField.focus();
