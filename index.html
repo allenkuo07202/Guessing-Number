@@ -88,6 +88,7 @@
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
         resetSubmit.disabled = false;
+        setTimeout(gameReset, 5000);
 
       }
     } else {
@@ -99,6 +100,7 @@
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
         resetSubmit.disabled = false;
+        setTimeout(gameReset, 5000);
 
       }
     }
