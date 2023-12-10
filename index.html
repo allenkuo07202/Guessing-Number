@@ -12,29 +12,59 @@
   <input type="text" id="guessField" />
   <input type="submit" value="猜!" id="guessSubmit" />
   <input type="submit" value="答案" id="answerSubmit" />
+  <input type="submit" value="再玩一次" id="resetSubmit" />
   <p class="message"></p>
   <p class="answer"></p>
 </body>
 <script>
   // Random number
-  const targetNumber = Math.floor(Math.random() * 100) + 1;
+  var targetNumber = Math.floor(Math.random() * 100) + 1;
   console.log("answer: " + targetNumber);
 
   // Get element
   const guessField = document.getElementById("guessField");
   const guessSubmit = document.getElementById("guessSubmit");
   const answerSubmit = document.getElementById("answerSubmit");
+  const resetSubmit = document.getElementById("resetSubmit");
   const message = document.querySelector(".message");
   const answer = document.querySelector(".answer");
   const question = document.querySelector(".question");
 
+  resetSubmit.disabled = true;
+
   // Event listener
   guessSubmit.addEventListener("click", checkGuess);
   answerSubmit.addEventListener("click", answerRevealed);
+  resetSubmit.addEventListener("click", gameReset);
 
 
   function answerRevealed() {
     answer.textContent = targetNumber;
+  }
+
+  function gameReset() {
+    var count = 0;
+    var lowerbound = 1;
+    var higherbound = 100;
+
+    targetNumber = Math.floor(Math.random() * 100) + 1;
+    console.log("answer: " + targetNumber);
+
+
+    // const guessField = document.getElementById("guessField");
+    // const guessSubmit = document.getElementById("guessSubmit");
+    // const answerSubmit = document.getElementById("answerSubmit");
+    // const message = document.querySelector(".message");
+    // const answer = document.querySelector(".answer");
+    // const question = document.querySelector(".question");
+
+    message.textContent = "";
+    question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
+    guessSubmit.disabled = false;
+
+    guessSubmit.addEventListener("click", checkGuess);
+    answerSubmit.addEventListener("click", answerRevealed);
+
   }
 
   // Guess function
@@ -50,6 +80,11 @@
       message.textContent = `恭喜你，你猜對了！你這次猜了` + count + `次哦～`;
       message.style.color = "green";
       guessSubmit.disabled = true;
+      resetSubmit.disabled = false;
+      // setZero();
+      count = 0;
+      lowerbound = 1;
+      higherbound = 100;
     } else if (userGuess < targetNumber) {
       message.textContent = "太小了，再試一次。";
       message.style.color = "red";
@@ -58,6 +93,11 @@
       if (count == 5) {
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
+        resetSubmit.disabled = false;
+        count = 0;
+        lowerbound = 1;
+        higherbound = 100;
+        // setZero();
       }
     } else {
       message.textContent = "太大了，再試一次。";
@@ -67,9 +107,19 @@
       if (count == 5) {
         message.textContent = `You Failed! 答案是 ${targetNumber}`;
         guessSubmit.disabled = true;
+        resetSubmit.disabled = false;
+        count = 0;
+        lowerbound = 1;
+        higherbound = 100;
+        // setZero();
       }
     }
 
+    function setZero() {
+      var count = 0;
+      var lowerbound = 1;
+      var higherbound = 100;
+    }
 
 
     guessField.value = "";
