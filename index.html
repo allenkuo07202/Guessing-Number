@@ -96,9 +96,7 @@
         delayedDisplay("3", 2000, display);
         delayedDisplay("2", 3000, display);
         delayedDisplay("1", 4000, display);
-        delayedDisplay("", 5000, display);
-        setTimeout(gameReset, 5000);
-
+        delayedDisplay("", 5000, gameReset);
       }
     } else {
       message.textContent = "太大了，再試一次。";
@@ -114,9 +112,7 @@
         delayedDisplay("3", 2000, display);
         delayedDisplay("2", 3000, display);
         delayedDisplay("1", 4000, display);
-        delayedDisplay("", 5000, display);
-        setTimeout(gameReset, 5000);
-
+        delayedDisplay("", 5000, gameReset);
       }
     }
 
@@ -127,28 +123,16 @@
   function delayedDisplay(string, ms, func) {
     // setTimeout(func, ms);
     setTimeout(() => display(string), ms);
-    // setTimeout(() => { console.log(string) }, ms);
-    // display(string);
-    // console.log(string);
-
+    if (string === "") {
+      setTimeout(() => gameReset(), ms);
+    }
   }
 
 
   function display(result) {
-
     console.log(result);
     reciprocal.textContent = result;
-
   }
-
-  // delayedDisplay("5", 0, display);
-  // delayedDisplay("4", 1000, display);
-  // delayedDisplay("3", 2000, display);
-  // delayedDisplay("2", 3000, display);
-  // delayedDisplay("1", 4000, display);
-  // delayedDisplay("", 5000, display);
-
-  // setTimeout(() => { console.log("test123") }, 3000);
 
 </script>
 
