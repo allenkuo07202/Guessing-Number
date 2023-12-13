@@ -96,6 +96,7 @@
         delayedDisplay("3", 2000, display);
         delayedDisplay("2", 3000, display);
         delayedDisplay("1", 4000, display);
+        delayedDisplay("", 5000, display);
         delayedDisplay("", 5000, gameReset);
       }
     } else {
@@ -112,6 +113,7 @@
         delayedDisplay("3", 2000, display);
         delayedDisplay("2", 3000, display);
         delayedDisplay("1", 4000, display);
+        delayedDisplay("", 5000, display);
         delayedDisplay("", 5000, gameReset);
       }
     }
@@ -120,12 +122,18 @@
     guessField.focus();
   }
 
+  // function delayedDisplay(string, ms, func) {
+  //   // setTimeout(func, ms);
+  //   setTimeout(() => display(string), ms);
+  //   if (string === "") {
+  //     setTimeout(() => gameReset(), ms);
+  //   }
+  // }
+
   function delayedDisplay(string, ms, func) {
     // setTimeout(func, ms);
-    setTimeout(() => display(string), ms);
-    if (string === "") {
-      setTimeout(() => gameReset(), ms);
-    }
+    setTimeout(func, ms, string);
+
   }
 
 
