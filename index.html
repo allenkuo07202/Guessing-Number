@@ -61,10 +61,6 @@
     resetSubmit.disabled = true;
     answerSubmit.disabled = false;
 
-
-    guessSubmit.addEventListener("click", checkGuess);
-    answerSubmit.addEventListener("click", answerRevealed);
-
   }
 
   // Guess function
@@ -87,34 +83,16 @@
       message.style.color = "red";
       lowerbound = userGuess;
       question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
-      if (count == 5) {
-        message.textContent = `You Failed! 答案是 ${targetNumber}`;
-        guessSubmit.disabled = true;
-        resetSubmit.disabled = false;
-        delayedDisplay("5", 0, display);
-        delayedDisplay("4", 1000, display);
-        delayedDisplay("3", 2000, display);
-        delayedDisplay("2", 3000, display);
-        delayedDisplay("1", 4000, display);
-        delayedDisplay("", 5000, display);
-        delayedDisplay("", 5000, gameReset);
+      if (count >= 5) {
+        failed();
       }
     } else {
       message.textContent = "太大了，再試一次。";
       message.style.color = "red";
       higherbound = userGuess;
       question.textContent = `${lowerbound} 到 ${higherbound} 之間的數字，你猜是多少？`;
-      if (count == 5) {
-        message.textContent = `You Failed! 答案是 ${targetNumber}`;
-        guessSubmit.disabled = true;
-        resetSubmit.disabled = false;
-        delayedDisplay("5", 0, display);
-        delayedDisplay("4", 1000, display);
-        delayedDisplay("3", 2000, display);
-        delayedDisplay("2", 3000, display);
-        delayedDisplay("1", 4000, display);
-        delayedDisplay("", 5000, display);
-        delayedDisplay("", 5000, gameReset);
+      if (count >= 5) {
+        failed();
       }
     }
 
@@ -122,13 +100,18 @@
     guessField.focus();
   }
 
-  // function delayedDisplay(string, ms, func) {
-  //   // setTimeout(func, ms);
-  //   setTimeout(() => display(string), ms);
-  //   if (string === "") {
-  //     setTimeout(() => gameReset(), ms);
-  //   }
-  // }
+  function failed() {
+    message.textContent = `You Failed! 答案是 ${targetNumber}`;
+    guessSubmit.disabled = true;
+    resetSubmit.disabled = false;
+    delayedDisplay("5", 0, display);
+    delayedDisplay("4", 1000, display);
+    delayedDisplay("3", 2000, display);
+    delayedDisplay("2", 3000, display);
+    delayedDisplay("1", 4000, display);
+    delayedDisplay("", 5000, display);
+    delayedDisplay("", 5000, gameReset);
+  }
 
   function delayedDisplay(string, ms, func) {
     // setTimeout(func, ms);
